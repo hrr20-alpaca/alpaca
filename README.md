@@ -1,12 +1,12 @@
 # Project Name
 
-> Pithy project description
+> Quiz App
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Prithvi A
+  - __Scrum Master__: Brittany
+  - __Development Team Members__: Andrew Cookro, Cal Holloway
 
 ## Table of Contents
 
@@ -20,13 +20,13 @@
 
 ## Usage
 
-> Some usage instructions
+> This app is public and free to use. Feel free to fork and make contributions.
 
 ## Requirements
 
 - Node 0.10.x
 - Redis 2.6.x
-- Postgresql 9.1.x
+- MySQL 
 - etc
 - etc
 
