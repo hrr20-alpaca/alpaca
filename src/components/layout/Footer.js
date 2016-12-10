@@ -4,8 +4,8 @@ export default class Footer extends React.Component {
   render() {
     return (
       <footer>
-        <div class="row">
-          <div class="col-lg-12">
+        <div className="row">
+          <div className="col-lg-12">
             <p>Add the Footer message here</p>
           </div>
         </div>
