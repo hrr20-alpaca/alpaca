@@ -9,7 +9,7 @@
 
 .App-header {
   background-color: #222;
-  height: 40px;
+  height: 45px;
   padding: 20px;
   color: white;
 }
@@ -38,11 +38,11 @@ li a {
   margin: 0;
   color: white;
   text-decoration: none;
-  padding: 30px 16px;
+  padding: 25px 16px;
 }
 
 li a:hover {
-    background-color: #111;
+  background-color: #111;
 }
 
 .container {
@@ -50,15 +50,16 @@ li a:hover {
   margin: 0 auto;
   text-align: center;
 }
+
 .answer {
-    margin-top: 50px;
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline;
-    font-size: 16px;
-    /*float: left;*/
+  margin-top: 50px;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  font-size: 16px;
+  /*float: left;*/
 }
