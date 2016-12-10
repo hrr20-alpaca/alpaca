@@ -9,7 +9,7 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 45px;
   padding: 20px;
   color: white;
 }
@@ -21,4 +21,45 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+li {
+  list-style-type: none;
+  display: inline;
+  float: right;
+  margin-right: 5px;
+}
+
+.username {
+  color: grey;
+}
+
+li a {
+  margin: 0;
+  color: white;
+  text-decoration: none;
+  padding: 25px 16px;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.answer {
+  margin-top: 50px;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  font-size: 16px;
+  /*float: left;*/
 }
