@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/App.css"
 import { IndexLink, Link } from "react-router";
 
 export default class Nav extends React.Component {
