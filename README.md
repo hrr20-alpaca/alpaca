@@ -1,6 +1,6 @@
 # Project Name
 
-> Quiz App
+> Crash-Course
 
 ## Team
 
@@ -26,7 +26,7 @@
 
 - Node 0.10.x
 - Redis 2.6.x
-- MySQL 
+- MySQL
 - etc
 - etc
 
