@@ -20,7 +20,7 @@ module.exports = function(grunt) {
     },
     watch: {
       browserify: {
-        files: ['src/**/*.jsx'],
+        files: ['src/**/*.js'],
         tasks: ['browserify']
       }
     },
@@ -38,9 +38,9 @@ module.exports = function(grunt) {
             insertGlobals: true
           }
         },
-        src: [
-          'src/**/*.jsx'
-          ],
+        src:
+          ['src/**/*.js']
+          ,
         dest: 'public/bundle.js'
       }
     },
