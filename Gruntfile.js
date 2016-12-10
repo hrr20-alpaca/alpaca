@@ -1,6 +1,15 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    concurrent: {
+      target: {
+        tasks: ['nodemon', 'watch'],
+        options: {
+            logConcurrentOutput: true
+        }
+      }
+    },
     jshint: {
       files: ['Gruntfile.js', 'server.js', 'controllers/**/*.js', 'db/**/*.js'],
       options: {
@@ -10,10 +19,31 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['jshint']
+      browserify: {
+        files: ['src/**/*.jsx'],
+        tasks: ['browserify']
+      }
     },
-
+    browserify: {
+      dist: {
+        options: {
+          transform: [
+            ['babelify', {
+              presets: ['es2015', 'react']
+            }]
+          ],
+          watch: true,
+          browserifyOptions: {
+            debug: true,
+            insertGlobals: true
+          }
+        },
+        src: [
+          'src/**/*.jsx'
+          ],
+        dest: 'public/bundle.js'
+      }
+    },
     nodemon: {
       dev: {
         script: 'server.js'
@@ -28,10 +58,20 @@ module.exports = function(grunt) {
 
   });
 
+  // loading modules
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-concurrent');
 
-  grunt.registerTask('default', ['jshint', 'watch']);
+
+  // additional tasks
+  grunt.registerTask('link', ['jshint', 'watch']);
+
+  grunt.registerTask('build', ['browserify']);
+
+  grunt.registerTask('default', ['build','concurrent:target']);
 
 };
