@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, IndexRoute, hashHistory } from "react-router";
 
-import Login from "./pages/Login";
-import Signin from "./pages/Signin";
 import CustomQuiz from "./pages/CustomQuiz";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
 import PrebuiltQuiz from "./pages/PrebuiltQuiz";
 import Layout from "./pages/Layout";
 import Settings from "./pages/Settings";
@@ -17,6 +17,8 @@ ReactDOM.render(
       <Route path="settings" name="settings" component={Settings}></Route>
       <Route path="prebuiltQuiz" name="prebuiltQuiz" component={PrebuiltQuiz}></Route>
       <Route path="customQuiz" name="customQuiz" component={CustomQuiz}></Route>
+      <Route path="signup" name="signup" component={SignUp}></Route>
+      <Route path="login" name="login" component={Login}></Route>
     </Route>
   </Router>,
 app);
