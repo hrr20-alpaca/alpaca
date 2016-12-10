@@ -1,43 +1,23 @@
 var db = require('../db');
 
 module.exports = {
-  messages: {
+  questions: {
     get: function (req, res) {
-      db.Message.findAll({include: [db.User]})
-        .then(function(messages) {
-          res.json(messages);
+      db.Question.findAll()
+        .then(function(questions) {
+          res.json(questions);
         });
     },
     post: function (req, res) {
-      db.User.findOrCreate({where: {username: req.body.username}})
-        // findOrCreate returns multiple resutls in an array
-        // use spread to assign the array to function arguments
-        .spread(function(user, created) {
-          db.Message.create({
-            userid: user.get('id'),
-            text: req.body.message,
-            roomname: req.body.roomname
-          }).then(function(message) {
+          db.Question.create({
+            name: req.body.name,
+            correct: req.body.correct,
+            wrong1: req.body.wrong1,
+            wrong2: req.body.wrong2,
+            wrong3: req.body.wrong3,
+          }).then(function(question) {
             res.sendStatus(201);
           });
-        });
-    }
-  },
-
-  users: {
-    get: function (req, res) {
-      db.User.findAll()
-        .then(function(users) {
-          res.json(users);
-        });
-    },
-    post: function (req, res) {
-      db.User.findOrCreate({where: {username: req.body.username}})
-        // findOrCreate returns multiple resutls in an array
-        // use spread to assign the array to function arguments
-        .spread(function(user, created) {
-          res.sendStatus(created ? 201 : 200);
-        });
     }
   }
 };
