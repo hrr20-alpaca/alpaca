@@ -1,5 +1,5 @@
 import React from "react";
-import { IndexLink, Link } from "react-router";
+import { Link } from 'react-router'
 
 export default class Nav extends React.Component {
   constructor() {
@@ -37,10 +37,10 @@ export default class Nav extends React.Component {
           </div>
           <div className={"navbar-collapse " + navClass} id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
-
-                <li><span className="settings"> <Link to="settings" onClick={this.toggleCollapse.bind(this)}>Settings</Link></span> </li>
-                <li><span className="username">USERNAME</span></li>
-
+              <li><Link to="/settings" onClick={this.toggleCollapse.bind(this)}>Settings</Link></li>
+              <li><Link to="/login">Log In</Link></li>
+              <li><Link to="/signup">Sign Up</Link></li>
+              {/*<li><span className="username">USERNAME</span></li>*/}
             </ul>
           </div>
         </div>
