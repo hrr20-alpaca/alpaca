@@ -11,7 +11,11 @@ export default class PrebuiltQuiz extends React.Component {
       wrong2: '',
       wrong3: '',
       questions: [],
-      answers: []
+      answers: [],
+      index: 0,
+      timeCount:60,
+      correctAns: 0, // number of correct and wrong answer submissions
+      wrongAns: 0,
     };
   }
 
@@ -21,6 +25,7 @@ export default class PrebuiltQuiz extends React.Component {
 
   GetQuestions() {
     var questions;
+    var index = this.state.index;
     axios.get('/questions')
       .then(response =>{
         questions = response.data;
@@ -31,34 +36,98 @@ export default class PrebuiltQuiz extends React.Component {
             // shuffle the values and then map to
           // onclick would get the value of the clicked button
             // compare that value to this.state.correct
+
         this.setState({
-          name: questions[0].name,
-          correct: questions[0].correct,
-          wrong1: questions[0].wrong1,
-          wrong2: questions[0].wrong2,
-          wrong3: questions[0].wrong3,
           questions: this.state.questions.concat(questions),
-          answers: this.state.answers.concat(questions[0].correct, questions[0].wrong1, questions[0].wrong2, questions[0].wrong3)
-        })
+        }, this.handleQuestionChange);
+        // this.setState({
+        //   name: questions[index].name,
+        //   correct: questions[index].correct,
+        //   wrong1: questions[index].wrong1,
+        //   wrong2: questions[index].wrong2,
+        //   wrong3: questions[index].wrong3,
+        //   questions: this.state.questions.concat(questions),
+        //   answers: this.state.answers.concat(questions[index].correct, questions[index].wrong1, questions[index].wrong2, questions[index].wrong3)
+        // })
       })
       .catch(function(err){
         console.log(err)
       })
   }
 
-  clicked(e) {
+  handleClick(e) {
     if (this.state.correct === e.target.textContent) {
-      alert("Correct");
+      this.handleCorrect();
     } else {
-      alert("Wrong");
+      this.handleWrong();
     }
   }
 
+  handleCorrect() {
+    alert("Correct");
+    this.setState({
+      timeCount: 60,
+      index: this.state.index + 1,
+      answers: [],
+      correctAns: this.state.correctAns + 1,
+    }, this.handleQuestionChange)
+  }
+  handleWrong() {
+    alert("Wrong");
+    this.setState({
+      timeCount: 60,
+      index: this.state.index + 1,
+      answers: [],
+      wrongAns: this.state.wrongAns + 1,
+    }, this.handleQuestionChange)
+  }
+  handleTime() {
+    this.setState({
+      timeCount: this.state.timeCount-1,
+    }, function() {
+      if (this.state.timeCount === 0) {
+        this.handleOutofTime();
+      }
+    })
+  }
+  handleTimeCount() {
+    var that = this;
+    setInterval(function() {
+      that.handleTime();
+    }, 1000);
+  }
+  handleOutofTime() {
+    alert('OUT OF TIME!');
+  }
+  handleQuestionChange() {
+    var questions = this.state.questions;
+    var index = this.state.index;
+    if (index === this.state.questions.length) {
+      this.handleEndQuiz();
+    } else {
+      this.setState({
+        name: questions[index].name,
+        correct: questions[index].correct,
+        wrong1: questions[index].wrong1,
+        wrong2: questions[index].wrong2,
+        wrong3: questions[index].wrong3,
+        answers: this.state.answers.concat(questions[index].correct, questions[index].wrong1, questions[index].wrong2, questions[index].wrong3)
+      });
+    }
+  }
+  handleEndQuiz() {
+    var percent = (this.state.correctAns/(this.state.questions.length)).toFixed(2) * 100;
+    alert('quiz complete, your score is : ' + percent + '%!');
+  }
+
   render() {
+    // this.handleTimeCount();
+
     // getting this in with the componentDidMount
     return (
        <div className="App">
-        {this.state.answers.map(option => <button onClick={this.clicked.bind(this)} className={`answer btn btn-lg ${option}`}>{option}</button> )}
+        <h1>{this.state.name}</h1>
+        {this.state.answers.map(option => <button onClick={this.handleClick.bind(this)} className={`answer btn btn-lg ${option}`}>{option}</button> )}
         <div className="container"></div>
       </div>
     );
