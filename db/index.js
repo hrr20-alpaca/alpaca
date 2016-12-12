@@ -3,7 +3,15 @@ var db = new Sequelize('crashcourse', 'root', '');
 
 var User = db.define('User', {
   username: Sequelize.STRING,
-  password: Sequelize.STRING
+  password: Sequelize.STRING,
+  firstname: Sequelize.STRING,
+  lastname: Sequelize.STRING,
+  email: {
+    type: Sequelize.STRING,
+    validate: {
+      isEmail: true
+    }
+  }
 }, {
   // timestamps: false // this will deactivate the timestamp columns
 });
