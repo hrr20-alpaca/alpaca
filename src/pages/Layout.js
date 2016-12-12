@@ -17,12 +17,12 @@ export default class Layout extends React.Component {
 
         <div className="container" style={containerStyle}>
           <div className="row">
-            <div className="col-lg-12">
-              <h1>Crash Course</h1>
+            {/*<div className="col-lg-12">*/}
+             {/*<h1>Crash Course</h1>*/}
 
               {this.props.children}
 
-            </div>
+            {/*</div>*/}
           </div>
           <Footer/>
         </div>

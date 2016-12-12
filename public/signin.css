@@ -1,0 +1,14 @@
+.login, .signup {
+  margin: 50px auto;
+  box-shadow: 0 1px #e1e1e1 inset,0 -1px #e1e1e1 inset;
+  padding: 44px 0;
+}
+
+.main-login-container h1, .main-signup-container h1 {
+  font-size: 28px;
+  margin-top: 50px;
+}
+
+.main-login-container .btn, .main-signup-container .btn {
+  text-transform: uppercase;
+}
