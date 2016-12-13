@@ -7,6 +7,8 @@ export default class PrebuiltQuiz extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      userID: '',
+      category: '',
       name: '',
       correct: '',
       wrong1: '',
@@ -155,5 +157,3 @@ export default class PrebuiltQuiz extends React.Component {
     );
   }
 }
-
-
