@@ -37,7 +37,6 @@ export default class Login extends React.Component {
   }
 
   render() {
-    console.log("Login");
     return (
       <div className="container main-login-container">
         <div className="col-md-4 col-md-offset-4">

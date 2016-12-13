@@ -58,30 +58,44 @@ export default class CustomQuiz extends React.Component {
 
   render() {
     return (
-      <form>
-        {/* changed from label to label htmlFor (react version), added input names to make labels work */}
-        <div className="input-group">
-          <label htmlFor="question">Question</label>
-          <input name="question" type="text" className="form-control" placeholder="Enter a question" onChange={this.handleQuestion.bind(this)}></input>
-        </div>
-        <div className="input-group">
-          <label htmlFor="answer">Correct</label>
-          <input name="answer" type="text" className="form-control" placeholder="Enter a answer" onChange={this.handleCorrentAnswer.bind(this)}></input>
-        </div>
-        <div className="input-group">
-          <label htmlFor="option1">Wrong 1</label>
-          <input name="option1" type="text" className="form-control" placeholder="Enter a answer" onChange={this.handleWrong1.bind(this)}></input>
-        </div>
-        <div className="input-group">
-          <label htmlFor="option2">Wrong 2</label>
-          <input name="option2" type="text" className="form-control" placeholder="Enter a answer" onChange={this.handleWrong2.bind(this)}></input>
-        </div>
-        <div className="input-group">
-          <label htmlFor="option3">Wrong 3</label>
-          <input name="option3" type="text" className="form-control" placeholder="Enter a answer" onChange={this.handleWrong3.bind(this)}></input>
-        </div>
-        <button type="submit" onClick={this.sendCustomTemplate.bind(this)}>Submit</button>
-      </form>
+      <div className="container customquiz">
+       <div className="col-md-4 col-md-offset-4">
+        <h2>Build a Custom Quiz</h2>
+        <form className="form-customquiz customquiz">
+          <div className="form-group row">
+            <label className="col-xs-4 col-form-label" htmlFor="question">Question</label>
+            <div className="col-xs-8">
+              <input name="question" type="text" className="form-control" placeholder="Enter a question" onChange={this.handleQuestion.bind(this)}></input>
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-4 col-form-label" htmlFor="answer">Correct</label>
+            <div className="col-xs-8">
+              <input name="answer" type="text" className="form-control" placeholder="Enter an answer" onChange={this.handleCorrentAnswer.bind(this)}></input>
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-4 col-form-label" htmlFor="option1">Wrong 1</label>
+            <div className="col-xs-8">
+              <input name="option1" type="text" className="form-control" placeholder="Enter an answer" onChange={this.handleWrong1.bind(this)}></input>
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-4 col-form-label" htmlFor="option2">Wrong 2</label>
+            <div className="col-xs-8">
+              <input name="option2" type="text" className="form-control" placeholder="Enter an answer" onChange={this.handleWrong2.bind(this)}></input>
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-4 col-form-label" htmlFor="option3">Wrong 3</label>
+            <div className="col-xs-8">
+              <input name="option3" type="text" className="form-control" placeholder="Enter an answer" onChange={this.handleWrong3.bind(this)}></input>
+            </div>
+          </div>
+          <button className="btn btn-sm btn-primary" type="submit" onClick={this.sendCustomTemplate.bind(this)}>Submit</button>
+        </form>
+      </div>
+    </div>  
     )
   }
 }
