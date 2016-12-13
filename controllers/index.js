@@ -4,32 +4,32 @@ module.exports = {
   // in quiz page, GET request will return object of all quiz Q's and A's
   questions: {
     get: function (req, res) {
-      console.log('===> MAKING GET REQUEST FOR QUESTIONS, REQ.BODY = ', req)
-
+      // console.log('===> MAKING GET REQUEST FOR QUESTIONS, REQ.PARAMS = ', JSON.parse(JSON.stringify(req.query)).ID)
+      console.log('===> MAKING GET REQUEST FOR QUESTIONS, REQ.PARAMS = ', req.query.ID)
 
       /////////////////////////////////////////////////////////////
       // HERE IS WHERE WE NEED TO DO THE FUNKY GET REQUEST BASED ON
       // A STRING FOLLOWING /questions/*****
 
 
-      // if (req.params.ID !== '') {
-      //   console.log('INSIDE IF STATEMENT')
-      //   db.Question.findAll({
-      //     where: {
-      //       testName: req.params.ID
-      //     }
-      //   })
-      //   .then(function(questions) {
-      //     res.json(questions);
-      //   });
-      // } else {
+      if (req.query.ID !== '') {
+        console.log('INSIDE IF STATEMENT')
+        db.Question.findAll({
+          where: {
+            testName: req.query.ID
+          }
+        })
+        .then(function(questions) {
+          res.json(questions);
+        });
+      } else {
 
         db.Question.findAll()
         .then(function(questions) {
           res.json(questions);
         });
-        
-      // }
+
+      }
 
 
 
