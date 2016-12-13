@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+
+
 export default class PrebuiltQuiz extends React.Component {
   constructor(props){
     super(props);
@@ -16,11 +18,34 @@ export default class PrebuiltQuiz extends React.Component {
       timeCount:60,
       correctAns: 0, // number of correct and wrong answer submissions
       wrongAns: 0,
+      startTimer: true
     };
   }
 
   componentDidMount(){
-    this.GetQuestions()
+    this.GetQuestions();
+
+  }
+
+  componentDidUpdate() {
+    if (this.state.startTimer) {
+      this.handleTimeCount();
+      this.setState({startTimer: false});
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  playCorrectSound() {
+    var audio = new Audio('./assets/correct.mp3');
+    audio.play();
+  }
+
+  playWrongSound() {
+    var audio = new Audio('./assets/wrongCrash.wav');
+    audio.play();
   }
 
   GetQuestions() {
@@ -40,15 +65,6 @@ export default class PrebuiltQuiz extends React.Component {
         this.setState({
           questions: this.state.questions.concat(questions),
         }, this.handleQuestionChange);
-        // this.setState({
-        //   name: questions[index].name,
-        //   correct: questions[index].correct,
-        //   wrong1: questions[index].wrong1,
-        //   wrong2: questions[index].wrong2,
-        //   wrong3: questions[index].wrong3,
-        //   questions: this.state.questions.concat(questions),
-        //   answers: this.state.answers.concat(questions[index].correct, questions[index].wrong1, questions[index].wrong2, questions[index].wrong3)
-        // })
       })
       .catch(function(err){
         console.log(err)
@@ -64,7 +80,10 @@ export default class PrebuiltQuiz extends React.Component {
   }
 
   handleCorrect() {
-    alert("Correct");
+    // this.player.play('correct.mp3', function(err) {
+    //   console.log('sound error', err);
+    //  });
+    this.playCorrectSound();
     this.setState({
       timeCount: 60,
       index: this.state.index + 1,
@@ -73,7 +92,7 @@ export default class PrebuiltQuiz extends React.Component {
     }, this.handleQuestionChange)
   }
   handleWrong() {
-    alert("Wrong");
+    this.playWrongSound();
     this.setState({
       timeCount: 60,
       index: this.state.index + 1,
@@ -86,18 +105,17 @@ export default class PrebuiltQuiz extends React.Component {
       timeCount: this.state.timeCount-1,
     }, function() {
       if (this.state.timeCount === 0) {
-        this.handleOutofTime();
+        this.handleWrong();
       }
+      clearInterval(this.timer);
+      this.setState({startTimer: true});
     })
   }
   handleTimeCount() {
     var that = this;
-    setInterval(function() {
+    this.timer = setInterval(function() {
       that.handleTime();
     }, 1000);
-  }
-  handleOutofTime() {
-    alert('OUT OF TIME!');
   }
   handleQuestionChange() {
     var questions = this.state.questions;
@@ -121,15 +139,21 @@ export default class PrebuiltQuiz extends React.Component {
   }
 
   render() {
-    // this.handleTimeCount();
 
     // getting this in with the componentDidMount
+
+
+
     return (
        <div className="App">
         <h1>{this.state.name}</h1>
         {this.state.answers.map(option => <button onClick={this.handleClick.bind(this)} className={`answer btn btn-lg ${option}`}>{option}</button> )}
         <div className="container"></div>
+        <h2>{this.state.timeCount}</h2>
+
       </div>
     );
   }
 }
+
+
