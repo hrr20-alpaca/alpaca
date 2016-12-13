@@ -16,7 +16,7 @@ export default class PrebuiltQuiz extends React.Component {
       wrong3: '',
       questions: [],
       answers: [],
-      index: 0,
+      index: null,
       timeCount:60,
       correctAns: 0, // number of correct and wrong answer submissions
       wrongAns: 0,
