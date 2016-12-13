@@ -57,12 +57,10 @@ module.exports = function(grunt) {
       database: {
         command: [
           'mysql.server start',
-          'mysql -u root -e "create database if not exists crashcourse',
-          '.exit'
+          'mysql -u root -e "create database if not exists crashcourse"'
         ].join('&&')
       }
     }
-
 
   });
 

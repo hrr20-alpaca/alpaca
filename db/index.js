@@ -40,3 +40,4 @@ Results.sync();
 
 exports.User = User;
 exports.Question = Question;
+exports.Results = Results;
