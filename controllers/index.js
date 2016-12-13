@@ -40,10 +40,25 @@ module.exports = {
     post: function (req, res) {
           db.User.create({
             username: req.body.username,
-            password: generatePasswordHash(req.body.password)
+            password: generatePasswordHash(req.body.password),
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email
           }).then(function(user) {
             res.sendStatus(201);
           });
+    }
+  },
+  results: {
+    post: function (req, res) {
+      db.Results.create({
+        userID: req.body.userID,
+        category: req.body.category,
+        correct: req.body.correctAns,
+        incorrect: req.body.wrongAns
+      }).then(function(results) {
+        res.sendStatus(201);
+      })
     }
   }
 };
