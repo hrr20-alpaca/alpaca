@@ -4,22 +4,59 @@ module.exports = {
   // in quiz page, GET request will return object of all quiz Q's and A's
   questions: {
     get: function (req, res) {
-      db.Question.findAll()
+      console.log('===> MAKING GET REQUEST FOR QUESTIONS, REQ.BODY = ', req)
+
+
+      /////////////////////////////////////////////////////////////
+      // HERE IS WHERE WE NEED TO DO THE FUNKY GET REQUEST BASED ON
+      // A STRING FOLLOWING /questions/*****
+
+
+      // if (req.params.ID !== '') {
+      //   console.log('INSIDE IF STATEMENT')
+      //   db.Question.findAll({
+      //     where: {
+      //       testName: req.params.ID
+      //     }
+      //   })
+      //   .then(function(questions) {
+      //     res.json(questions);
+      //   });
+      // } else {
+
+        db.Question.findAll()
         .then(function(questions) {
           res.json(questions);
         });
+        
+      // }
+
+
+
     },
     // in quiz Creation page, POST request will add an entry into database
     post: function (req, res) {
-          db.Question.create({
-            name: req.body.name,
-            correct: req.body.correct,
-            wrong1: req.body.wrong1,
-            wrong2: req.body.wrong2,
-            wrong3: req.body.wrong3,
-          }).then(function(question) {
-            res.sendStatus(201);
-          });
+      console.log('POST REQUEST TO QUESTIONS')
+      console.log(JSON.stringify(req.body));
+      if (req.body.delete === true) {
+        console.log('POST delete request for name = ' + req.body.name);
+        db.Question.destroy({
+            where: {
+              name: req.body.name
+            }
+        })
+      } else {
+        db.Question.create({
+          name: req.body.name,
+          correct: req.body.correct,
+          wrong1: req.body.wrong1,
+          wrong2: req.body.wrong2,
+          wrong3: req.body.wrong3,
+          testName: req.body.testName,
+        }).then(function(question) {
+          res.sendStatus(201);
+        });
+      }
     }
   },
   user: {

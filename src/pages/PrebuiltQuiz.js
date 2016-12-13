@@ -147,12 +147,11 @@ export default class PrebuiltQuiz extends React.Component {
 
 
     return (
-       <div className="App">
+      <div className="App">
         <h1>{this.state.name}</h1>
         {this.state.answers.map(option => <button onClick={this.handleClick.bind(this)} className={`answer btn btn-lg ${option}`}>{option}</button> )}
         <div className="container"></div>
         <h2>{this.state.timeCount}</h2>
-
       </div>
     );
   }

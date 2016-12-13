@@ -11,7 +11,9 @@ export default class CustomQuiz extends React.Component {
       answer: '',
       option1: '',
       option2: '',
-      option3: ''
+      option3: '',
+      testName: '',
+      currQuesList: [],
     };
   }
 
@@ -22,7 +24,8 @@ export default class CustomQuiz extends React.Component {
       correct: this.state.answer,
       wrong1: this.state.option1,
       wrong2: this.state.option2,
-      wrong3: this.state.option3
+      wrong3: this.state.option3,
+      testName: this.state.testName,
     })
   }
 
@@ -56,12 +59,86 @@ export default class CustomQuiz extends React.Component {
     });
   }
 
+  handleTestName(e) {
+    this.setState({
+      testName: e.target.value,
+      currQuesList: [],
+    }, this.getTestNameCurrentQuestions);
+  }
+
+  getTestNameCurrentQuestions() {
+    var entries;
+    var config = {
+      params: {
+        ID: this.state.testName
+      }
+    };
+
+    console.log('before get request currQuesList = ' + this.state.currQuesList);
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////
+    // HERE IS WHERE I LEFT OFF, WE NEED TO USE THE SERVER ROUTING TO
+    // GET FILTERED RESULTS BASED ON A STRING FOLLOWING /questions/******
+
+
+
+
+
+
+
+
+
+    axios.get('/questions/' + this.state.testName)
+      .then(response => {
+        console.log('line 75 custom quiz, res.body = ' + JSON.stringify(response.data, null, 2));
+        entries = response.data;
+        entries.forEach(entry => {
+          this.setState({
+            currQuesList: this.state.currQuesList.push(entry.name),
+          });
+        })
+      console.log('after get request currQuesList = ' + this.state.currQuesList);
+      })
+      .catch(function(err){
+        console.log(err)
+      })
+  }
+
+  handleRemove(e) {
+    // do something here that posts a delete request to server
+    console.log('handleRemove function INVOKED')
+    axios.post('/questions', {
+      delete: true,
+      name: e.target.textContent,
+    }).then(response => {
+      this.setState({
+        currQuesList: [],
+      }, this.getTestNameCurrentQuestions)
+    })
+    .catch(function(err){
+      console.log(err)
+    })
+  }
+
   render() {
     return (
       <div className="container customquiz">
        <div className="col-md-4 col-md-offset-4">
         <h2>Build a Custom Quiz</h2>
         <form className="form-customquiz customquiz">
+          <div className="form-group row">
+            <label className="col-xs-4 col-form-label" htmlFor="testName">Test Name</label>
+            <div className="col-xs-8">
+              <input name="testName" type="text" className="form-control" placeholder="Enter the Name of this Test" onChange={this.handleTestName.bind(this)}></input>
+            </div>
+          </div>
+
           <div className="form-group row">
             <label className="col-xs-4 col-form-label" htmlFor="question">Question</label>
             <div className="col-xs-8">
@@ -94,8 +171,12 @@ export default class CustomQuiz extends React.Component {
           </div>
           <button className="btn btn-sm btn-primary" type="submit" onClick={this.sendCustomTemplate.bind(this)}>Submit</button>
         </form>
+
+        <h3>Click questions below to delete them once created!</h3>
+        {this.state.currQuesList.map(option => <button onClick={this.handleRemove.bind(this)} className={`answer btn btn-lg ${option}`}>{option}</button> )}
+
       </div>
-    </div>  
+    </div>
     )
   }
 }

@@ -16,7 +16,8 @@ var Question = db.define('Question', {
   wrong1: Sequelize.STRING,
   wrong2: Sequelize.STRING,
   wrong3: Sequelize.STRING,
-  categories: Sequelize.STRING
+  categories: Sequelize.STRING,
+  testName: Sequelize.STRING
 });
 
 var Results = db.define('Results', {
