@@ -18,7 +18,8 @@ export default class CustomQuiz extends React.Component {
   }
 
   //post request via axios
-  sendCustomTemplate() {
+  sendCustomTemplate(e) {
+    //e.preventDefault();
     axios.post('/questions', {
       name: this.state.question,
       correct: this.state.answer,
@@ -27,6 +28,16 @@ export default class CustomQuiz extends React.Component {
       wrong3: this.state.option3,
       testName: this.state.testName,
     })
+    .then(() => {
+      this.setState({
+        name: '',
+        correct: '',
+        wrong1: '',
+        wrong2: '',
+        wrong3: ''
+      })
+    });
+    this.getTestNameCurrentQuestions();
   }
 
   handleQuestion(e) {
@@ -67,6 +78,7 @@ export default class CustomQuiz extends React.Component {
   }
 
   getTestNameCurrentQuestions() {
+    console.log('getasdsfasdfadsf');
     var entries;
     var config = {
       params: {
@@ -104,10 +116,12 @@ export default class CustomQuiz extends React.Component {
       axios.post('/questions', {
         delete: true,
         name: tempName,
-      }).then(response => {
-          this.getTestNameCurrentQuestions();
-        })
       })
+      .catch(function(err){
+        console.log(err)
+      });
+      this.getTestNameCurrentQuestions();
+    });
   }
 
   render() {
