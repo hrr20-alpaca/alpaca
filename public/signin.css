@@ -1,14 +1,57 @@
-.login, .signup {
+/* 
+############# 
+  Login/Signup styles 
+############### 
+*/
+.login , .signup {
   margin: 50px auto;
   box-shadow: 0 1px #e1e1e1 inset,0 -1px #e1e1e1 inset;
   padding: 44px 0;
 }
 
-.main-login-container h1, .main-signup-container h1 {
+.main-login-container h1, .main-signup-container h1{
   font-size: 28px;
   margin-top: 50px;
 }
 
 .main-login-container .btn, .main-signup-container .btn {
   text-transform: uppercase;
+}
+
+
+/* 
+############# 
+  Homepage styles 
+############### 
+*/
+
+
+.homepage h2 {
+  font-weight: lighter;
+  font-size: 22px;
+}
+
+.hero-section {
+  width: 100%;
+  font-family: "FontAwesome";
+  content: "\f108";
+  height: 300px;
+}
+
+.fa-desktop {
+  font-size: 270px;
+  padding: 20px 0;
+}
+
+.main-content {
+  padding: 50px 0;
+}
+
+.footer {
+  /*background-image: linear-gradient(#04519b, #044687 60%, #033769);*/
+  /*background-repeat: no-repeat;*/
+  /*color: #fff;*/
+  border-top: 1px solid #eee ;
+  padding: 10px 0;
+  height: 40px;
 }
