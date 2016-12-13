@@ -54,7 +54,16 @@ module.exports = function(grunt) {
       prodServer: {
         command: 'git push live master',
       },
-    }
+      database: {
+        command: [
+          'mysql.server start',
+          'mysql -u root -p ""',
+          'create database crashcourse'
+        ].join('&&')
+      }
+    },
+
+
 
   });
 
@@ -72,6 +81,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', ['browserify']);
 
-  grunt.registerTask('default', ['build','concurrent:target']);
+  grunt.registerTask('default', ['build','concurrent:target', 'shell:database']);
 
 };
