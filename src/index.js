@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, IndexRoute, hashHistory } from "react-router";
+import 'velocity-animate';
+import 'velocity-animate/velocity.ui';
 
 import CustomQuiz from "./pages/CustomQuiz";
 import SignUp from "./pages/SignUp";
