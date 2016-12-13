@@ -50,9 +50,14 @@ module.exports = {
     }
   },
   results: {
-    get: function(req, res) {
+    post: function (req, res) {
       db.Results.create({
-
+        userID: req.body.userID,
+        category: req.body.category,
+        correct: req.body.correctAns,
+        incorrect: req.body.wrongAns
+      }).then(function(results) {
+        res.sendStatus(201);
       })
     }
   }
