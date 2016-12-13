@@ -6,12 +6,6 @@ export default class Homepage extends React.Component {
     console.log("homepage");
     return (
       <div className="container homepage">
-      <p>
-       <Link to="/prebuiltQuiz">PreBuilt Quiz</Link>
-      </p>
-      <p>
-       <Link to="/customQuiz">Custom Quiz</Link>
-      </p>
         <div className="row text-center hero-section">
           <h1>CrashCourse</h1>
           <i className="fa fa-desktop"></i>
