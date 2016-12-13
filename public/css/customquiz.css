@@ -1,3 +1,13 @@
 .customquiz {
   margin: 50px auto;
 }
+
+#ground {
+  position: absolute;
+  top: 400px;
+  width: 80%;
+  background-color: green;
+  border-style: solid;
+  border-color: green;
+  height: 40px;
+}
