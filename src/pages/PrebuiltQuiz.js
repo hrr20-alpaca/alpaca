@@ -25,6 +25,7 @@ export default class PrebuiltQuiz extends React.Component {
       quizNames: [],
       score: 0,
       completedQuiz: false,
+      showTimer: false,
     };
   }
 
@@ -194,6 +195,7 @@ export default class PrebuiltQuiz extends React.Component {
       timeCount:15,
       correctAns: 0,
       wrongAns: 0,
+      showTimer: true,
     }, this.GetQuestions);
 
   }
@@ -225,7 +227,11 @@ export default class PrebuiltQuiz extends React.Component {
             </VelocityTransitionGroup>
 
             <div className="container"></div>
-            <h2>{this.state.timeCount}</h2>
+
+            {
+              this.state.showTimer ? <h2>{this.state.timeCount}</h2> : null
+            }
+
             <div id='ground'></div>
           </div>
       }
