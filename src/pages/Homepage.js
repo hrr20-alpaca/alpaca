@@ -13,33 +13,6 @@ export default class Homepage extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.getQuizes();
-  }
-
-  getQuizes() {
-    axios.get('/questions')
-      .then(response => {
-        console.log('line 75 custom quiz, res.body = ' + JSON.stringify(response.data, null, 2));
-
-        var entries = response.data;
-        var temp = [];
-        entries.forEach(entry => {
-          if (entries.indexOf(entry.testName) === -1) {
-            temp.push(entry.testName);
-          }
-        });
-        this.setState({
-          quizNames: temp,
-        });
-      })
-      .catch(function(err){
-        console.log(err)
-      })
-
-
-
-  }
 
 
 
@@ -68,13 +41,6 @@ export default class Homepage extends React.Component {
         </div>
 
 
-        <select>
-          {this.state.quizNames.map(name =>
-
-            <option value={name}>{name}</option>
-
-          )}
-        </select>
 
 
       </div>

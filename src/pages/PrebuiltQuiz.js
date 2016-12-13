@@ -20,13 +20,39 @@ export default class PrebuiltQuiz extends React.Component {
       timeCount:60,
       correctAns: 0, // number of correct and wrong answer submissions
       wrongAns: 0,
-      startTimer: true
+      startTimer: true,
+      quizName: '',
+      quizNames: [],
     };
   }
 
   componentDidMount(){
+    this.getQuizes();
     this.GetQuestions();
 
+  }
+
+
+
+  getQuizes() {
+    axios.get('/questions')
+      .then(response => {
+        console.log('line 75 custom quiz, res.body = ' + JSON.stringify(response.data, null, 2));
+
+        var entries = response.data;
+        var temp = [];
+        entries.forEach(entry => {
+          if (temp.indexOf(entry.testName) === -1) {
+            temp.push(entry.testName);
+          }
+        });
+        this.setState({
+          quizNames: temp,
+        });
+      })
+      .catch(function(err){
+        console.log(err)
+      })
   }
 
   componentDidUpdate() {
@@ -51,9 +77,14 @@ export default class PrebuiltQuiz extends React.Component {
   }
 
   GetQuestions() {
+    var config = {
+      params: {
+        ID: this.state.quizName
+      }
+    };
     var questions;
     var index = this.state.index;
-    axios.get('/questions')
+    axios.get('/questions', config)
       .then(response =>{
         questions = response.data;
         // console.log(questions)
@@ -138,16 +169,40 @@ export default class PrebuiltQuiz extends React.Component {
   handleEndQuiz() {
     var percent = (this.state.correctAns/(this.state.questions.length)).toFixed(2) * 100;
     alert('quiz complete, your score is : ' + percent + '%!');
+
+    // redirect to homepage
+    // hashHistory.push('/Homepage');
+    // <Redirect from="some/where/:id" to="somewhere/else/:id" params={{id: 2}}/>
+    // this.transitionTo('Homepage');
+    // browserHistory.push('/');
+    // this.props.router.replace('/');  Homepage.contextTypes = {     router: React.PropTypes.object.isRequired  }
+  }
+
+  handleQuizSelect(e) {
+    this.setState({
+      quizName: event.target.value,
+      questions: [],
+      answers: [],
+      index: 0,
+      timeCount:60,
+      correctAns: 0,
+      wrongAns: 0,
+    }, this.GetQuestions);
+
   }
 
   render() {
 
-    // getting this in with the componentDidMount
-
-
-
     return (
       <div className="App">
+
+        <h1>Select a quiz!</h1>
+        <select onChange={this.handleQuizSelect.bind(this)} value={this.state.value}>
+          {this.state.quizNames.map(name =>
+            <option value={name}>{name}</option>
+          )}
+        </select>
+
         <h1>{this.state.name}</h1>
         <VelocityTransitionGroup enter={{animation: "slideDown", duration:6000}}>
 
