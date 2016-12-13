@@ -73,36 +73,20 @@ export default class CustomQuiz extends React.Component {
         ID: this.state.testName
       }
     };
+    // console.log('before get request currQuesList = ' + this.state.currQuesList);
 
-    console.log('before get request currQuesList = ' + this.state.currQuesList);
-
-
-
-
-
-
-
-    /////////////////////////////////////////////////////////////////////
-    // HERE IS WHERE I LEFT OFF, WE NEED TO USE THE SERVER ROUTING TO
-    // GET FILTERED RESULTS BASED ON A STRING FOLLOWING /questions/******
-
-
-
-
-
-
-
-
-
-    axios.get('/questions/' + this.state.testName)
+    axios.get('/questions', config)
       .then(response => {
         console.log('line 75 custom quiz, res.body = ' + JSON.stringify(response.data, null, 2));
+
         entries = response.data;
+        var temp = [];
         entries.forEach(entry => {
-          this.setState({
-            currQuesList: this.state.currQuesList.push(entry.name),
-          });
-        })
+          temp.push(entry.name);
+        });
+        this.setState({
+          currQuesList: temp,
+        });
       console.log('after get request currQuesList = ' + this.state.currQuesList);
       })
       .catch(function(err){
@@ -113,17 +97,17 @@ export default class CustomQuiz extends React.Component {
   handleRemove(e) {
     // do something here that posts a delete request to server
     console.log('handleRemove function INVOKED')
-    axios.post('/questions', {
-      delete: true,
-      name: e.target.textContent,
-    }).then(response => {
-      this.setState({
-        currQuesList: [],
-      }, this.getTestNameCurrentQuestions)
-    })
-    .catch(function(err){
-      console.log(err)
-    })
+    var tempName = e.target.textContent;
+    this.setState({
+      currQuesList: [],
+    }, function() {
+      axios.post('/questions', {
+        delete: true,
+        name: tempName,
+      }).then(response => {
+          this.getTestNameCurrentQuestions();
+        })
+      })
   }
 
   render() {
@@ -173,8 +157,11 @@ export default class CustomQuiz extends React.Component {
         </form>
 
         <h3>Click questions below to delete them once created!</h3>
-        {this.state.currQuesList.map(option => <button onClick={this.handleRemove.bind(this)} className={`answer btn btn-lg ${option}`}>{option}</button> )}
-
+        {this.state.currQuesList.map(option =>
+          <button
+            onClick={this.handleRemove.bind(this)}
+            className={`answer btn btn-lg ${option}`}>{option}
+          </button> )}
       </div>
     </div>
     )
