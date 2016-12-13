@@ -25,6 +25,12 @@ var Question = db.define('Question', {
   categories: Sequelize.STRING
 });
 
+var Results = db.define('Results', {
+  userID: Sequelize.INTEGER,
+  category: Sequelize.STRING,
+  correct: Sequelize.INTEGER,
+  incorrect: Sequelize.INTEGER
+});
 
 // If we are adding columns or otherwise changing the schema
 // we can add {force: true} inside .sync to drop the tables
@@ -36,6 +42,7 @@ User.sync()
     console.log('An error occurred while creating the Users table:', err);
   });
 Question.sync();
+Results.sync();
 
 exports.User = User;
 exports.Question = Question;
