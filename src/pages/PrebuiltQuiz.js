@@ -208,6 +208,7 @@ export default class PrebuiltQuiz extends React.Component {
           <div>
             <h1>Select a quiz!</h1>
             <select onChange={this.handleQuizSelect.bind(this)} value={this.state.value}>
+              <option selected></option>
               {this.state.quizNames.map(name =>
                 <option value={name}>{name}</option>
               )}
