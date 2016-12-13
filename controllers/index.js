@@ -11,25 +11,25 @@ module.exports = {
       // HERE IS WHERE WE NEED TO DO THE FUNKY GET REQUEST BASED ON
       // A STRING FOLLOWING /questions/*****
 
-
-      if (req.query.ID !== '') {
-        console.log('INSIDE IF STATEMENT')
-        db.Question.findAll({
-          where: {
-            testName: req.query.ID
-          }
-        })
-        .then(function(questions) {
-          res.json(questions);
-        });
-      } else {
+      //
+      // if (req.query.ID !== '') {
+      //   console.log('INSIDE IF STATEMENT')
+      //   db.Question.findAll({
+      //     where: {
+      //       testName: req.query.ID
+      //     }
+      //   })
+      //   .then(function(questions) {
+      //     res.json(questions);
+      //   });
+      // } else {
 
         db.Question.findAll()
         .then(function(questions) {
           res.json(questions);
         });
 
-      }
+      // }
 
 
 

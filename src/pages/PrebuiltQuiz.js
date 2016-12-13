@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { VelocityComponent, VelocityTransitionGroup, velocityHelpers } from 'velocity-react'
+import { VelocityComponent, VelocityTransitionGroup, velocityHelpers } from 'velocity-react';
 
 
 export default class PrebuiltQuiz extends React.Component {
