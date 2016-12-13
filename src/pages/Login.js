@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import { Link } from 'react-router';
+
 
 //instead of writing <a href="">, you can substitute it with Link
 // import { Link } from "react-router";
@@ -56,7 +58,7 @@ export default class Login extends React.Component {
             <button className="btn btn-sm btn-primary" type="submit" onClick={this.sendCredentials.bind(this)}>Log In</button>
           </form>
           <div className="row text-center">
-            <small>Don't have an account?<a href=""> Sign Up</a></small>
+            <small >Don't have an account?<Link to="/signup"> Sign Up</Link></small>
           </div>  
         </div>
       </div> 
