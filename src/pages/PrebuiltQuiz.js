@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import { VelocityComponent, VelocityTransitionGroup, velocityHelpers } from 'velocity-react'
 
 
 export default class PrebuiltQuiz extends React.Component {
@@ -149,7 +149,12 @@ export default class PrebuiltQuiz extends React.Component {
     return (
       <div className="App">
         <h1>{this.state.name}</h1>
+        <VelocityTransitionGroup enter={{animation: "slideDown", duration:6000}}>
+
+
         {this.state.answers.map(option => <button onClick={this.handleClick.bind(this)} className={`answer btn btn-lg ${option}`}>{option}</button> )}
+      </VelocityTransitionGroup>
+
         <div className="container"></div>
         <h2>{this.state.timeCount}</h2>
       </div>
