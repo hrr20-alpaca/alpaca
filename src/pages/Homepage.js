@@ -1,7 +1,48 @@
 import React from "react";
 import { Link } from 'react-router'
+import axios from 'axios';
 
 export default class Homepage extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+
+    this.state = {
+      quizNames: []
+    };
+  }
+
+  componentDidMount() {
+    this.getQuizes();
+  }
+
+  getQuizes() {
+    axios.get('/questions')
+      .then(response => {
+        console.log('line 75 custom quiz, res.body = ' + JSON.stringify(response.data, null, 2));
+
+        var entries = response.data;
+        var temp = [];
+        entries.forEach(entry => {
+          if (entries.indexOf(entry.testName) === -1) {
+            temp.push(entry.testName);
+          }
+        });
+        this.setState({
+          quizNames: temp,
+        });
+      })
+      .catch(function(err){
+        console.log(err)
+      })
+
+
+
+  }
+
+
+
   render() {
     console.log("homepage");
     return (
@@ -25,7 +66,18 @@ export default class Homepage extends React.Component {
               <Link to="/signup">Learn More</Link>
           </div>
         </div>
-      </div>  
+
+
+        <select>
+          {this.state.quizNames.map(name =>
+
+            <option value={name}>{name}</option>
+
+          )}
+        </select>
+
+
+      </div>
     );
   }
 }
