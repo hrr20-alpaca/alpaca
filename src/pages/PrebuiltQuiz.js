@@ -17,12 +17,14 @@ export default class PrebuiltQuiz extends React.Component {
       questions: [],
       answers: [],
       index: null,
-      timeCount:60,
+      timeCount:15,
       correctAns: 0, // number of correct and wrong answer submissions
       wrongAns: 0,
       startTimer: true,
       quizName: '',
       quizNames: [],
+      score: 0,
+      completedQuiz: false,
     };
   }
 
@@ -118,7 +120,7 @@ export default class PrebuiltQuiz extends React.Component {
     //  });
     this.playCorrectSound();
     this.setState({
-      timeCount: 60,
+      timeCount: 15,
       index: this.state.index + 1,
       answers: [],
       correctAns: this.state.correctAns + 1,
@@ -127,7 +129,7 @@ export default class PrebuiltQuiz extends React.Component {
   handleWrong() {
     this.playWrongSound();
     this.setState({
-      timeCount: 60,
+      timeCount: 15,
       index: this.state.index + 1,
       answers: [],
       wrongAns: this.state.wrongAns + 1,
@@ -168,7 +170,12 @@ export default class PrebuiltQuiz extends React.Component {
   }
   handleEndQuiz() {
     var percent = (this.state.correctAns/(this.state.questions.length)).toFixed(2) * 100;
-    alert('quiz complete, your score is : ' + percent + '%!');
+    clearInterval(this.timer);
+    this.setState({
+      score: percent,
+      completedQuiz: true,
+    })
+    // alert('quiz complete, your score is : ' + percent + '%!');
 
     // redirect to homepage
     // hashHistory.push('/Homepage');
@@ -184,7 +191,7 @@ export default class PrebuiltQuiz extends React.Component {
       questions: [],
       answers: [],
       index: 0,
-      timeCount:60,
+      timeCount:15,
       correctAns: 0,
       wrongAns: 0,
     }, this.GetQuestions);
@@ -196,26 +203,31 @@ export default class PrebuiltQuiz extends React.Component {
     return (
       <div className="App">
 
-        <h1>Select a quiz!</h1>
-        <select onChange={this.handleQuizSelect.bind(this)} value={this.state.value}>
-          {this.state.quizNames.map(name =>
-            <option value={name}>{name}</option>
-          )}
-        </select>
+      {
+          this.state.completedQuiz ? <h1>quiz complete, your score is: {this.state.score}%!</h1> :
+          <div>
+            <h1>Select a quiz!</h1>
+            <select onChange={this.handleQuizSelect.bind(this)} value={this.state.value}>
+              {this.state.quizNames.map(name =>
+                <option value={name}>{name}</option>
+              )}
+            </select>
 
-        <h1>{this.state.name}</h1>
-        <VelocityTransitionGroup
-          enter={{animation: "transition.slideDownBigOut", duration: 20000, opacity: [1,1], translateY: 200}}
-          leave={{opacity: [1,1]}}
-        >
+            <h1>{this.state.name}</h1>
+            <VelocityTransitionGroup
+              enter={{animation: "transition.slideDownBigOut", duration: 20000, opacity: [1,1], translateY: 200}}
+              leave={{opacity: [1,1]}}
+              >
 
 
-        {this.state.answers.map(option => <button onClick={this.handleClick.bind(this)} className={`answer btn btn-lg ${option}`}>{option}</button> )}
-      </VelocityTransitionGroup>
+              {this.state.answers.map(option => <button onClick={this.handleClick.bind(this)} className={`answer btn btn-lg ${option}`}>{option}</button> )}
+            </VelocityTransitionGroup>
 
-        <div className="container"></div>
-        <h2>{this.state.timeCount}</h2>
-        <div id='ground'></div>
+            <div className="container"></div>
+            <h2>{this.state.timeCount}</h2>
+            <div id='ground'></div>
+          </div>
+      }
       </div>
     );
   }
