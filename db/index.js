@@ -29,7 +29,7 @@ var Results = db.define('Results', {
 // If we are adding columns or otherwise changing the schema
 // we can add {force: true} inside .sync to drop the tables
 // NOTE: THIS DELETES ALL THE DATA IN THE TABLE
-User.sync({force: true})
+User.sync()
   .then(function(err) {
     console.log('Created Users Table!');
   }, function (err) {
