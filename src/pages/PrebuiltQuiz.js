@@ -180,7 +180,7 @@ export default class PrebuiltQuiz extends React.Component {
 
   handleQuizSelect(e) {
     this.setState({
-      quizName: event.target.value,
+      quizName: e.target.value,
       questions: [],
       answers: [],
       index: 0,
