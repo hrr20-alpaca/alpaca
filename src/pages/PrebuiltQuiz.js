@@ -29,7 +29,7 @@ export default class PrebuiltQuiz extends React.Component {
   }
 
   componentDidMount(){
-    this.getQuizes();
+    this.getQuizes(); // generate drop down list to select test
     this.GetQuestions();
   }
 
