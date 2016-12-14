@@ -6,15 +6,7 @@ module.exports = function(grunt) {
       target: {
         tasks: ['nodemon', 'watch'],
         options: {
-            logConcurrentOutput: true
-        }
-      }
-    },
-    jshint: {
-      files: ['Gruntfile.js', 'server.js', 'controllers/**/*.js', 'db/**/*.js'],
-      options: {
-        globals: {
-          jQuery: true
+          logConcurrentOutput: true
         }
       }
     },
@@ -23,6 +15,17 @@ module.exports = function(grunt) {
         files: ['src/**/*.js'],
         tasks: ['browserify']
       }
+    },
+    eslint: {
+      options: {
+        configFile: '.eslintrc.js'
+      },
+      src: [
+        './controllers/*.js',
+        './db/*.js',
+        './src/**/*.js',
+        './*.js'
+      ]
     },
     browserify: {
       dist: {
@@ -38,9 +41,7 @@ module.exports = function(grunt) {
             insertGlobals: true
           }
         },
-        src:
-          ['src/**/*.js']
-          ,
+        src: ['src/**/*.js'],
         dest: 'public/bundle.js'
       }
     },
@@ -49,11 +50,7 @@ module.exports = function(grunt) {
         script: 'server.js'
       }
     },
-
     shell: {
-      prodServer: {
-        command: 'git push live master',
-      },
       database: {
         command: [
           'mysql.server start',
@@ -65,19 +62,18 @@ module.exports = function(grunt) {
   });
 
   // loading modules
-  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('gruntify-eslint');
 
 
   // additional tasks
-  grunt.registerTask('link', ['jshint', 'watch']);
+  grunt.registerTask('link', ['eslint', 'watch']);
 
-  grunt.registerTask('build', ['browserify']);
+  grunt.registerTask('build', ['eslint', 'browserify']);
 
-  grunt.registerTask('default', ['build','concurrent:target', 'shell:database']);
-
+  grunt.registerTask('default', ['build', 'concurrent:target', 'shell:database']);
 };

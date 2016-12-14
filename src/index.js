@@ -1,16 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Router, Route, IndexRoute, hashHistory } from "react-router";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import 'velocity-animate';
 import 'velocity-animate/velocity.ui';
 
-import CustomQuiz from "./pages/CustomQuiz";
-import SignUp from "./pages/SignUp";
-import Login from "./pages/Login";
-import PrebuiltQuiz from "./pages/PrebuiltQuiz";
-import Layout from "./pages/Layout";
-import Homepage from "./pages/Homepage";
-import Settings from "./pages/Settings";
+import CustomQuiz from './pages/CustomQuiz';
+import SignUp from './pages/SignUp';
+import Login from './pages/Login';
+import PrebuiltQuiz from './pages/PrebuiltQuiz';
+import Layout from './pages/Layout';
+import Homepage from './pages/Homepage';
+import Settings from './pages/Settings';
 
 const app = document.getElementById('root');
 

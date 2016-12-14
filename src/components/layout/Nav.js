@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from 'react-router'
+import React from 'react';
+import { Link } from 'react-router';
 
 export default class Nav extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       collapsed: true,
     };
@@ -17,7 +17,7 @@ export default class Nav extends React.Component {
   render() {
     const { location } = this.props;
     const { collapsed } = this.state;
-    const navClass = collapsed ? "collapse" : "";
+    const navClass = collapsed ? 'collapse' : '';
 
     return (
 
@@ -32,7 +32,7 @@ export default class Nav extends React.Component {
             </button>
             <a className="navbar-brand" href="#">CrashCourse</a>
           </div>
-          <div className={"navbar-collapse " + navClass} id="bs-example-navbar-collapse-1">
+          <div className={'navbar-collapse ' + navClass} id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
               <li><Link to="/settings" onClick={this.toggleCollapse.bind(this)}>Settings</Link></li>
               <li><Link to="/prebuiltQuiz">PreBuilt Quiz</Link></li>

@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from 'react-router'
+import React from 'react';
+import { Link } from 'react-router';
 import axios from 'axios';
 
 export default class Homepage extends React.Component {
@@ -17,7 +17,7 @@ export default class Homepage extends React.Component {
 
 
   render() {
-    console.log("homepage");
+    console.log('homepage');
     return (
       <div className="container homepage">
         <div className="row text-center hero-section">
