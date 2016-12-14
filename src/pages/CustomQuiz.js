@@ -136,7 +136,7 @@ export default class CustomQuiz extends React.Component {
           <div className='row'>
             <div className='col-md-6' >
               <h2>Build a Custom Quiz</h2>
-              
+
               <form className="form-customquiz customquiz">
                 <div className="form-group row">
                   <label className="col-xs-4 col-form-label" htmlFor="testName">Test Name</label>
@@ -184,7 +184,7 @@ export default class CustomQuiz extends React.Component {
               </form>
             </div>
 
-            <div className='col-md-6'  >
+            <div className='col-md-6'>
               <div>
                 <h3>Click questions below to delete them once created!</h3>
                 {this.state.currQuesList.map(option =>
