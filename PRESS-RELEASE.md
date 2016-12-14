@@ -17,13 +17,13 @@ Once the project moves into development, the press release can be used as a touc
  -->
 
 ## Crash-Course ##
-  > Fun and interactive quizes!
+  > Fun and interactive quizzes!
 
 ## A modern platform for Students and Teachers ##
   > Get ready for the latest and greatest in quiz creation, with a fresh and modern user interface that your students will be excited to play with!
 
 ## Summary ##
-  > Help promote a positive learning environment through the use of fun and interactive quizes.
+  > Help promote a positive learning environment through the use of fun and interactive quizzes.
 
 ## Problem ##
   > We at Crash-Course believe that modern educational platforms have not kept pace with the increases in technology and software. We believe that alleviating test anxiety helps promote a positive learning environment.

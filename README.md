@@ -24,11 +24,11 @@
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- MySQL
-- etc
-- etc
+- Node 6.9.1
+- React 15.4.1
+- MySQL 2.12.0
+- Express 4.14.0
+- Sequelize 3.27.0
 
 ## Development
 
@@ -37,15 +37,12 @@
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
+mysql.server start
+mysql -u root -p #(hit enter when prompted for password)
+create database crashcourse #(from within mysql)
+grunt #(from project root folder)
 ```
-
-### Roadmap
-
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
 
 ## Contributing
 
