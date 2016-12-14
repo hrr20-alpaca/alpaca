@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import { VelocityComponent, VelocityTransitionGroup, velocityHelpers } from 'velocity-react';
 
-
 export default class PrebuiltQuiz extends React.Component {
   constructor(props){
     super(props);
@@ -30,18 +29,13 @@ export default class PrebuiltQuiz extends React.Component {
   }
 
   componentDidMount(){
-    this.getQuizes();
+    this.getQuizes(); // generate drop down list to select test
     this.GetQuestions();
-
   }
-
-
 
   getQuizes() {
     axios.get('/questions')
       .then(response => {
-        console.log('line 75 custom quiz, res.body = ' + JSON.stringify(response.data, null, 2));
-
         var entries = response.data;
         var temp = [];
         entries.forEach(entry => {
@@ -90,14 +84,6 @@ export default class PrebuiltQuiz extends React.Component {
     axios.get('/questions', config)
       .then(response =>{
         questions = response.data;
-        // console.log(questions)
-        // new var - get response.data arr
-        // iterate through for each question
-          // get index 1 to end
-            // shuffle the values and then map to
-          // onclick would get the value of the clicked button
-            // compare that value to this.state.correct
-
         this.setState({
           questions: this.state.questions.concat(questions),
         }, this.handleQuestionChange);
@@ -116,9 +102,6 @@ export default class PrebuiltQuiz extends React.Component {
   }
 
   handleCorrect() {
-    // this.player.play('correct.mp3', function(err) {
-    //   console.log('sound error', err);
-    //  });
     this.playCorrectSound();
     this.setState({
       timeCount: 15,
@@ -176,14 +159,6 @@ export default class PrebuiltQuiz extends React.Component {
       score: percent,
       completedQuiz: true,
     })
-    // alert('quiz complete, your score is : ' + percent + '%!');
-
-    // redirect to homepage
-    // hashHistory.push('/Homepage');
-    // <Redirect from="some/where/:id" to="somewhere/else/:id" params={{id: 2}}/>
-    // this.transitionTo('Homepage');
-    // browserHistory.push('/');
-    // this.props.router.replace('/');  Homepage.contextTypes = {     router: React.PropTypes.object.isRequired  }
   }
 
   handleQuizSelect(e) {
@@ -200,53 +175,35 @@ export default class PrebuiltQuiz extends React.Component {
 
   }
 
+          // ternary is used in render to render the completed page if this.state.CompletedQuiz is true :)
+          // ternary is also used to display the Timer only after a test has been selected
   render() {
 
     return (
       <div className="App">
-
       {
           this.state.completedQuiz ? <h1>quiz complete, your score is: {this.state.score}%!</h1> :
           <div>
             <h1>Select a quiz!</h1>
-
-
-{/*
-          <div className="btn-group">
-            <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Select a test <span className="caret"></span>
-            </button>
-            <ul className="dropdown-menu" onChange={this.handleQuizSelect.bind(this)} value={this.state.value}>
-              {this.state.quizNames.map(name =>
-                <li><a href="#">{name}</a></li>
-              )}
-            </ul>
-          </div>
-*/}
-          
             <select className="buttonStyle" onChange={this.handleQuizSelect.bind(this)} value={this.state.value} >
               <option selected></option>
               {this.state.quizNames.map(name =>
                 <option value={name}>{name}</option>
               )}
             </select>
-          
+
             <h1>{this.state.name}</h1>
             <VelocityTransitionGroup
               enter={{animation: "transition.slideDownBigOut", duration: 20000, opacity: [1,1], translateY: 200}}
               leave={{opacity: [1,1]}}
-              >
-
-
+            >
               {this.state.answers.map(option => <button onClick={this.handleClick.bind(this)} className={`answer btn btn-lg ${option}`}>{option}</button> )}
             </VelocityTransitionGroup>
 
             <div className="container"></div>
-
             {
               this.state.showTimer ? <h2>{this.state.timeCount}</h2> : null
             }
-
             <div id='ground'></div>
           </div>
       }
