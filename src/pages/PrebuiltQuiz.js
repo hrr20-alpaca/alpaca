@@ -209,13 +209,28 @@ export default class PrebuiltQuiz extends React.Component {
           this.state.completedQuiz ? <h1>quiz complete, your score is: {this.state.score}%!</h1> :
           <div>
             <h1>Select a quiz!</h1>
-            <select onChange={this.handleQuizSelect.bind(this)} value={this.state.value}>
+
+
+{/*
+          <div className="btn-group">
+            <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Select a test <span className="caret"></span>
+            </button>
+            <ul className="dropdown-menu" onChange={this.handleQuizSelect.bind(this)} value={this.state.value}>
+              {this.state.quizNames.map(name =>
+                <li><a href="#">{name}</a></li>
+              )}
+            </ul>
+          </div>
+*/}
+          
+            <select className="buttonStyle" onChange={this.handleQuizSelect.bind(this)} value={this.state.value} >
               <option selected></option>
               {this.state.quizNames.map(name =>
                 <option value={name}>{name}</option>
               )}
             </select>
-
+          
             <h1>{this.state.name}</h1>
             <VelocityTransitionGroup
               enter={{animation: "transition.slideDownBigOut", duration: 20000, opacity: [1,1], translateY: 200}}
