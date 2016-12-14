@@ -6,8 +6,8 @@ export default class PrebuiltQuiz extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      userID: '',
-      category: '',
+      userID: '', // opportunity to get ID for currently logged-in user to track results
+      category: '', // opportunity to get category of current test to track results
       name: '',  // this is actually the question being asked (please change the name)
       correct: '',
       wrong1: '',
@@ -33,7 +33,7 @@ export default class PrebuiltQuiz extends React.Component {
     this.GetQuestions();
   }
 
-  // get all quiz's from server
+  // get all quizzes from server
   getQuizes() {
     axios.get('/questions')
       .then(response => {
@@ -200,6 +200,7 @@ export default class PrebuiltQuiz extends React.Component {
             </select>
 
             <h1>{this.state.name}</h1>
+            {/* animations for buttons */}
             <VelocityTransitionGroup
               enter={{animation: "transition.slideDownBigOut", duration: 20000, opacity: [1,1], translateY: 200}}
               leave={{opacity: [1,1]}}

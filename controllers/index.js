@@ -76,6 +76,7 @@ module.exports = {
     }
   },
   results: {
+    // opportunity to keep track of results in database, sorting by userID.
     post: function (req, res) {
       db.Results.create({
         userID: req.body.userID,
