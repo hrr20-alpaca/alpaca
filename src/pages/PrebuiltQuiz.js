@@ -8,7 +8,7 @@ export default class PrebuiltQuiz extends React.Component {
     this.state = {
       userID: '',
       category: '',
-      name: '',
+      name: '',  // this is actually the question being asked (please change the name)
       correct: '',
       wrong1: '',
       wrong2: '',
@@ -16,15 +16,15 @@ export default class PrebuiltQuiz extends React.Component {
       questions: [],
       answers: [],
       index: null,
-      timeCount:15,
-      correctAns: 0, // number of correct and wrong answer submissions
+      timeCount:15, // used for countdown
+      correctAns: 0, // number of correct and wrong answer submissions for percent
       wrongAns: 0,
-      startTimer: true,
+      startTimer: true, // begins timer
+      showTimer: false, // used to show timer after selecting a quiz
       quizName: '',
       quizNames: [],
       score: 0,
-      completedQuiz: false,
-      showTimer: false,
+      completedQuiz: false, // when true ternary in render shows the summary component
     };
   }
 
@@ -33,6 +33,7 @@ export default class PrebuiltQuiz extends React.Component {
     this.GetQuestions();
   }
 
+  // get all quiz's from server
   getQuizes() {
     axios.get('/questions')
       .then(response => {
@@ -67,12 +68,12 @@ export default class PrebuiltQuiz extends React.Component {
     var audio = new Audio('./assets/correct.mp3');
     audio.play();
   }
-
   playWrongSound() {
     var audio = new Audio('./assets/wrongCrash.wav');
     audio.play();
   }
 
+  // grabs all the questions based on the selected quiz from the drop down list
   GetQuestions() {
     var config = {
       params: {
@@ -93,6 +94,8 @@ export default class PrebuiltQuiz extends React.Component {
       })
   }
 
+  // *handle* functions take care of clicking the buttons, and the events of the
+  // quiz
   handleClick(e) {
     if (this.state.correct === e.target.textContent) {
       this.handleCorrect();
@@ -100,7 +103,6 @@ export default class PrebuiltQuiz extends React.Component {
       this.handleWrong();
     }
   }
-
   handleCorrect() {
     this.playCorrectSound();
     this.setState({
@@ -136,6 +138,9 @@ export default class PrebuiltQuiz extends React.Component {
       that.handleTime();
     }, 1000);
   }
+
+  // after clicking an answer, index is incremented and the next question and
+  // answer set is displayed
   handleQuestionChange() {
     var questions = this.state.questions;
     var index = this.state.index;
@@ -161,6 +166,8 @@ export default class PrebuiltQuiz extends React.Component {
     })
   }
 
+  // on selecting a quiz, reset timer, correct answer count and wrong count,
+  // and get the array of questions
   handleQuizSelect(e) {
     this.setState({
       quizName: e.target.value,
