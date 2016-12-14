@@ -17,9 +17,6 @@ export default class Nav extends React.Component {
   render() {
     const { location } = this.props;
     const { collapsed } = this.state;
-    // const featuredClass = location.pathname === "/" ? "active" : "";
-    // const archivesClass = location.pathname.match(/^\/archives/) ? "active" : "";
-    // const settingsClass = location.pathname.match(/^\/settings/) ? "active" : "";
     const navClass = collapsed ? "collapse" : "";
 
     return (
@@ -42,8 +39,6 @@ export default class Nav extends React.Component {
               <li><Link to="/customQuiz">Custom Quiz</Link></li>
               <li><Link to="/login">Log In</Link></li>
               <li><Link to="/signup">Sign Up</Link></li>
-
-              {/*<li><span className="username">USERNAME</span></li>*/}
             </ul>
           </div>
         </div>

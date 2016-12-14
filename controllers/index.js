@@ -5,13 +5,7 @@ module.exports = {
   questions: {
     get: function (req, res) {
       // console.log('===> MAKING GET REQUEST FOR QUESTIONS, REQ.PARAMS = ', JSON.parse(JSON.stringify(req.query)).ID)
-      console.log('===> MAKING GET REQUEST FOR QUESTIONS, REQ.PARAMS = ', req.query.ID)
-
-      /////////////////////////////////////////////////////////////
-      // HERE IS WHERE WE NEED TO DO THE FUNKY GET REQUEST BASED ON
-      // A STRING FOLLOWING /questions/*****
-
-
+      // console.log('===> MAKING GET REQUEST FOR QUESTIONS, REQ.PARAMS = ', req.query.ID)
       if (req.query.ID !== undefined) {
         console.log('INSIDE IF STATEMENT')
         db.Question.findAll({
@@ -28,7 +22,6 @@ module.exports = {
           res.json(questions);
         });
       }
-
     },
     // in quiz Creation page, POST request will add an entry into database
     post: function (req, res) {
