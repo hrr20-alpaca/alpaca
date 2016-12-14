@@ -4,7 +4,12 @@ export default class Settings extends React.Component {
   render() {
     console.log("settings");
     return (
-      <h1>Settings</h1>
+      <div>
+        <h1>Settings</h1>
+        <h5>Difficulty</h5>
+        <h5>Theme</h5>
+        <h5>Delete Account</h5>
+      </div>
     );
   }
 }
