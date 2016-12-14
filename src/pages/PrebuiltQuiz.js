@@ -1,9 +1,9 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
 import { VelocityComponent, VelocityTransitionGroup, velocityHelpers } from 'velocity-react';
 
 export default class PrebuiltQuiz extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       userID: '', // opportunity to get ID for currently logged-in user to track results
@@ -16,7 +16,7 @@ export default class PrebuiltQuiz extends React.Component {
       questions: [],
       answers: [],
       index: null,
-      timeCount:15, // used for countdown
+      timeCount: 15, // used for countdown
       correctAns: 0, // number of correct and wrong answer submissions for percent
       wrongAns: 0,
       startTimer: true, // begins timer
@@ -28,7 +28,7 @@ export default class PrebuiltQuiz extends React.Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getQuizes(); // generate drop down list to select test
     this.GetQuestions();
   }
@@ -48,9 +48,9 @@ export default class PrebuiltQuiz extends React.Component {
           quizNames: temp,
         });
       })
-      .catch(function(err){
-        console.log(err)
-      })
+      .catch(function(err) {
+        console.error(err);
+      });
   }
 
   componentDidUpdate() {
@@ -89,9 +89,9 @@ export default class PrebuiltQuiz extends React.Component {
           questions: this.state.questions.concat(questions),
         }, this.handleQuestionChange);
       })
-      .catch(function(err){
-        console.log(err)
-      })
+      .catch(function(err) {
+        console.error(err);
+      });
   }
 
   // *handle* functions take care of clicking the buttons, and the events of the
@@ -110,7 +110,7 @@ export default class PrebuiltQuiz extends React.Component {
       index: this.state.index + 1,
       answers: [],
       correctAns: this.state.correctAns + 1,
-    }, this.handleQuestionChange)
+    }, this.handleQuestionChange);
   }
   handleWrong() {
     this.playWrongSound();
@@ -119,18 +119,18 @@ export default class PrebuiltQuiz extends React.Component {
       index: this.state.index + 1,
       answers: [],
       wrongAns: this.state.wrongAns + 1,
-    }, this.handleQuestionChange)
+    }, this.handleQuestionChange);
   }
   handleTime() {
     this.setState({
-      timeCount: this.state.timeCount-1,
+      timeCount: this.state.timeCount - 1,
     }, function() {
       if (this.state.timeCount === 0) {
         this.handleWrong();
       }
       clearInterval(this.timer);
       this.setState({startTimer: true});
-    })
+    });
   }
   handleTimeCount() {
     var that = this;
@@ -158,12 +158,12 @@ export default class PrebuiltQuiz extends React.Component {
     }
   }
   handleEndQuiz() {
-    var percent = (this.state.correctAns/(this.state.questions.length)).toFixed(2) * 100;
+    var percent = (this.state.correctAns / (this.state.questions.length)).toFixed(2) * 100;
     clearInterval(this.timer);
     this.setState({
       score: percent,
       completedQuiz: true,
-    })
+    });
   }
 
   // on selecting a quiz, reset timer, correct answer count and wrong count,
@@ -174,7 +174,7 @@ export default class PrebuiltQuiz extends React.Component {
       questions: [],
       answers: [],
       index: 0,
-      timeCount:15,
+      timeCount: 15,
       correctAns: 0,
       wrongAns: 0,
       showTimer: true,
@@ -202,8 +202,8 @@ export default class PrebuiltQuiz extends React.Component {
             <h1>{this.state.name}</h1>
             {/* animations for buttons */}
             <VelocityTransitionGroup
-              enter={{animation: "transition.slideDownBigOut", duration: 20000, opacity: [1,1], translateY: 200}}
-              leave={{opacity: [1,1]}}
+              enter={{animation: 'transition.slideDownBigOut', duration: 20000, opacity: [1, 1], translateY: 200}}
+              leave={{opacity: [1, 1]}}
             >
               {this.state.answers.map(option => <button onClick={this.handleClick.bind(this)} className={`answer btn btn-lg ${option}`}>{option}</button> )}
             </VelocityTransitionGroup>

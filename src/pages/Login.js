@@ -1,5 +1,5 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
 import { Link } from 'react-router';
 
 
@@ -21,7 +21,7 @@ export default class Login extends React.Component {
     axios.post('/users', {
       email: this.state.email,
       password: this.state.password,
-    })
+    });
   }
 
   checkUsername(e) {
@@ -43,13 +43,13 @@ export default class Login extends React.Component {
           <h1>Log In</h1>
           <form className="form-signin login">
             <div className="form-group row">
-              <label htmlFor="username" className="col-xs-4 col-form-label">Email</label> 
+              <label htmlFor="username" className="col-xs-4 col-form-label">Email</label>
               <div className="col-xs-8">
                 <input type="email" className="form-control" id="email" placeholder="Email" onChange={this.checkUsername.bind(this)}></input>
               </div>
             </div>
             <div className="form-group row">
-              <label htmlFor="password" className="col-xs-4 col-form-label">Password</label> 
+              <label htmlFor="password" className="col-xs-4 col-form-label">Password</label>
               <div className="col-xs-8">
                 <input type="text" className="form-control" id="password" placeholder="Password" onChange={this.checkPassword.bind(this)}></input>
               </div>
@@ -58,9 +58,9 @@ export default class Login extends React.Component {
           </form>
           <div className="row text-center">
             <small >Don't have an account?<Link to="/signup"> Sign Up</Link></small>
-          </div>  
+          </div>
         </div>
-      </div> 
+      </div>
     );
   }
 }

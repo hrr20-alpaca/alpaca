@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 export default class SignUp extends React.Component {
-   constructor(props) {
+  constructor(props) {
     super(props);
 
     //keep state
@@ -19,7 +19,7 @@ export default class SignUp extends React.Component {
       lastname: this.state.lastname,
       username: this.state.username,
       password: this.state.password
-    })
+    });
   }
 
   checkFirstname(e) {
@@ -47,40 +47,40 @@ export default class SignUp extends React.Component {
   }
 
   render() {
-    console.log("SignUp");
+    console.log('SignUp');
     return (
       <div className="container main-signup-container">
         <div className="col-md-6 col-md-offset-3">
           <h1>Sign Up for CrashCourse</h1>
           <form className="form-signup signup">
            <div className="form-group row">
-              <label htmlFor="firstname" className="col-xs-4 col-form-label">First Name</label> 
+              <label htmlFor="firstname" className="col-xs-4 col-form-label">First Name</label>
               <div className="col-xs-8">
-                <input type="text" className="form-control" id="firstname"  onChange={this.checkFirstname.bind(this)}></input>
+                <input type="text" className="form-control" id="firstname" onChange={this.checkFirstname.bind(this)}></input>
               </div>
             </div>
             <div className="form-group row">
               <label htmlFor="lastname" className="col-xs-4 col-form-label">Last Name</label>
               <div className="col-xs-8">
-                <input type="text" className="form-control" id="lastname"  onChange={this.checkLastname.bind(this)}></input>
+                <input type="text" className="form-control" id="lastname" onChange={this.checkLastname.bind(this)}></input>
               </div>
             </div>
             <div className="form-group row">
               <label htmlFor="email" className="col-xs-4 col-form-label">Email</label>
               <div className="col-xs-8">
-                <input type="email" className="form-control" id="email"  onChange={this.checkUsername.bind(this)}></input>
+                <input type="email" className="form-control" id="email" onChange={this.checkUsername.bind(this)}></input>
               </div>
             </div>
             <div className="form-group row">
               <label htmlFor="password" className="col-xs-4 col-form-label">Password</label>
               <div className="col-xs-8">
-                <input type="text" className="form-control" id="password"  onChange={this.checkPassword.bind(this)}></input>
+                <input type="text" className="form-control" id="password" onChange={this.checkPassword.bind(this)}></input>
               </div>
             </div>
             <button className="btn btn-sm btn-primary" type="submit" onClick={this.sendCredentials.bind(this)}>Sign Up</button>
           </form>
         </div>
-      </div> 
+      </div>
     );
   }
 }

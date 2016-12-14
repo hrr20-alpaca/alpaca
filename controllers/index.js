@@ -7,7 +7,7 @@ module.exports = {
       // console.log('===> MAKING GET REQUEST FOR QUESTIONS, REQ.PARAMS = ', JSON.parse(JSON.stringify(req.query)).ID)
       // console.log('===> MAKING GET REQUEST FOR QUESTIONS, REQ.PARAMS = ', req.query.ID)
       if (req.query.ID !== undefined) {
-        console.log('INSIDE IF STATEMENT')
+        console.log('INSIDE IF STATEMENT');
         db.Question.findAll({
           where: {
             testName: req.query.ID
@@ -25,15 +25,15 @@ module.exports = {
     },
     // in quiz Creation page, POST request will add an entry into database
     post: function (req, res) {
-      console.log('POST REQUEST TO QUESTIONS')
+      console.log('POST REQUEST TO QUESTIONS');
       console.log(JSON.stringify(req.body));
       if (req.body.delete === true) {
         console.log('POST delete request for name = ' + req.body.name);
         db.Question.destroy({
-            where: {
-              name: req.body.name
-            }
-        })
+          where: {
+            name: req.body.name
+          }
+        });
       } else {
         db.Question.create({
           name: req.body.name,
@@ -64,15 +64,15 @@ module.exports = {
     },
     // in sign-up page, POST request will create user entry into database
     post: function (req, res) {
-          db.User.create({
-            username: req.body.username,
-            password: generatePasswordHash(req.body.password),
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            email: req.body.email
-          }).then(function(user) {
-            res.sendStatus(201);
-          });
+      db.User.create({
+        username: req.body.username,
+        password: generatePasswordHash(req.body.password),
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email
+      }).then(function(user) {
+        res.sendStatus(201);
+      });
     }
   },
   results: {
@@ -85,7 +85,7 @@ module.exports = {
         incorrect: req.body.wrongAns
       }).then(function(results) {
         res.sendStatus(201);
-      })
+      });
     }
   }
 };

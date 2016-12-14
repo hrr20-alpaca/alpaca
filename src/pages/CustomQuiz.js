@@ -1,8 +1,8 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
 
 export default class CustomQuiz extends React.Component {
- constructor(props) {
+  constructor(props) {
     super(props);
 
     //keep state
@@ -41,7 +41,7 @@ export default class CustomQuiz extends React.Component {
         wrong1: '',
         wrong2: '',
         wrong3: ''
-      })
+      });
     });
     this.getTestNameCurrentQuestions();
   }
@@ -107,9 +107,9 @@ export default class CustomQuiz extends React.Component {
           currQuesList: temp,
         });
       })
-      .catch(function(err){
-        console.log(err)
-      })
+      .catch(function(err) {
+        console.error(err);
+      });
   }
 
   handleRemove(e) {
@@ -122,8 +122,8 @@ export default class CustomQuiz extends React.Component {
         delete: true,
         name: tempName,
       })
-      .catch(function(err){
-        console.log(err)
+      .catch(function(err) {
+        console.error(err);
       });
       this.getTestNameCurrentQuestions();
     });
@@ -198,6 +198,6 @@ export default class CustomQuiz extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
